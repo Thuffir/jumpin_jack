@@ -1,4 +1,4 @@
-Check 6C09D99C
+Check 458F69F3
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -29,13 +29,19 @@ Auto 8224
  270 READ l
  280 POKE c,l
  290 NEXT c
- 300 REM Draw the map
- 310 PRINT AT 21,0;"\c\c\c\c\c\c\c\c\c\c\c\d\c\c\c\d\c\c\c\c\c\d\c\c\c\c\c\c\d\c\c\c"
- 320 REM Character movement
- 330 LET x=0: LET p=0
- 340 PRINT AT 19,p;" ": PRINT AT 20,p;" ": PRINT AT 19,x;"\a": PRINT AT 20,x;"\b"
- 350 LET m$=INKEY$: IF m$="" THEN GO TO 350
- 360 LET p=x
- 370 IF m$="n" AND x<>0 THEN LET x=x-1: GO TO 340
- 380 IF m$="m" AND x<>31 THEN LET x=x+1: GO TO 340
- 390 GO TO 350
+ 300 REM Map definition
+ 310 LET a$="\c\c\c\c\c\c\c\c\c\c\c\d\c\c\c\d\c\c\c\c\c\d\c\c\c\c\c\c\d\c\c\c"
+ 320 PRINT AT 21,0;a$
+ 330 REM Character movement
+ 340 LET x=0: LET p=0
+ 350 PRINT AT 19,p;" ": PRINT AT 20,p;" ": PRINT AT 19,x;"\a": PRINT AT 20,x;"\b"
+ 360 LET m$=INKEY$: IF m$="" THEN GO TO 360
+ 370 LET p=x
+ 380 IF m$="n" AND x<>0 THEN LET x=x-1
+ 390 IF m$="m" AND x<>31 THEN LET x=x+1
+ 400 REM Pitfall check
+ 410 IF a$(x+1)<>"\d" THEN GO TO 350
+ 420 PRINT AT 19,p;" ": PRINT AT 20,p;" "
+ 430 PRINT AT 21,x;"\a"
+ 440 PAUSE 60
+ 450 GO TO 320
