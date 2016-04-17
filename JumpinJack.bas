@@ -1,4 +1,4 @@
-Check B1EE3340
+Check 26989EEE
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -45,7 +45,7 @@ Auto 8224
  410 IF a$(x+1)<>"\d" OR y=18 THEN GO TO 350
  420 PRINT AT v,p;" ": PRINT AT v+1,p;" "
  430 PRINT AT 21,x;"\a"
- 440 PAUSE 60
+ 440 PAUSE 50
  450 GO TO 320
  460 REM Character Draw
  470 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b"
