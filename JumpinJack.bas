@@ -1,55 +1,38 @@
-Check F0E8E71F
+Check DDDEBC93
 Auto 8224
   10 REM Jack
-  20 DATA BIN 00011000
-  30 DATA BIN 00100100
-  40 DATA BIN 01000010
-  50 DATA BIN 10100101
-  60 DATA BIN 10000001
-  70 DATA BIN 01011010
-  80 DATA BIN 00100100
-  90 DATA BIN 00011000
- 100 DATA BIN 00011000
- 110 DATA BIN 00111100
- 120 DATA BIN 01011010
- 130 DATA BIN 10011001
- 140 DATA BIN 00100100
- 150 DATA BIN 01000010
- 160 DATA BIN 01000010
- 170 DATA BIN 11000011
- 180 REM Floor
- 190 DATA 0,255,0,0,0,0,0,0
- 200 REM Pit
- 210 DATA 0,0,0,0,0
- 220 DATA BIN 00010001
- 230 DATA BIN 10101010
- 240 DATA BIN 01000100
- 250 REM Char redefinition
- 260 FOR i=USR "A" TO USR "A"+31
- 270 READ l
- 280 POKE i,l
- 290 NEXT i
- 300 REM Map generation
- 310 RANDOMIZE
- 320 LET a$="\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c"
- 330 FOR i=2 TO 31
- 340 IF (RND*100)+1<=33 AND a$(i-1)<>"\d" THEN LET a$(i)="\d"
- 350 NEXT i
- 360 CLS
- 370 PRINT AT 21,0;a$
- 380 REM Character movement
- 390 LET x=0: LET y=19: LET p=0: LET v=19
- 400 GO SUB 530
- 410 PAUSE 0: LET m$=INKEY$
- 420 IF m$="n" AND x<>0 THEN LET x=x-1
- 430 IF m$="m" AND x<>31 THEN LET x=x+1
- 440 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 530: PAUSE 10: LET x=x-1: LET y=19
- 450 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 530: PAUSE 10: LET x=x+1: LET y=19
- 460 IF m$="a" THEN LET y=19
- 470 REM Pitfall check
- 480 IF a$(x+1)="\d" AND y=19 THEN LET y=20: GO SUB 530: PAUSE 10: PRINT AT 20,x;" ": PRINT AT 21,x;"\a": PAUSE 50: GO TO 370
- 490 REM Victory check
- 500 IF x=31 THEN GO SUB 530: PAUSE 10: FOR i=1 TO 5: LET y=18: GO SUB 530: PAUSE 10: LET y=19: GO SUB 530: PAUSE 10: NEXT i: GO TO 320
- 510 GO TO 400
- 520 REM Character Draw
- 530 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
+  20 DATA 24,36,66,165,129,90,36,24,24,60,90,153,36,66,66,195
+  30 REM Ground
+  40 DATA 0,255,0,0,0,0,0,0
+  50 REM Pit
+  60 DATA 0,0,0,0,0,17,170,68
+  70 REM Char redefinition
+  80 FOR i=USR "A" TO USR "A"+31
+  90 READ l
+ 100 POKE i,l
+ 110 NEXT i
+ 120 REM Map generation
+ 130 RANDOMIZE
+ 140 LET a$="\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c"
+ 150 FOR i=2 TO 31
+ 160 IF (RND*100)+1<=33 AND a$(i-1)<>"\d" THEN LET a$(i)="\d"
+ 170 NEXT i
+ 180 REM Print map and init
+ 190 CLS
+ 200 PRINT AT 21,0;a$
+ 210 LET x=0: LET y=19: LET p=0: LET v=19
+ 220 GO SUB 360
+ 230 REM User input
+ 240 PAUSE 0: LET m$=INKEY$
+ 250 IF m$="n" AND x<>0 THEN LET x=x-1
+ 260 IF m$="m" AND x<>31 THEN LET x=x+1
+ 270 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 360: PAUSE 10: LET x=x-1: LET y=19
+ 280 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 360: PAUSE 10: LET x=x+1: LET y=19
+ 290 IF m$="a" THEN LET y=19
+ 300 REM Pitfall check
+ 310 IF a$(x+1)="\d" AND y=19 THEN LET y=20: GO SUB 360: PAUSE 10: PRINT AT 20,x;" ": PRINT AT 21,x;"\a": PAUSE 50: GO TO 200
+ 320 REM Victory check
+ 330 IF x=31 THEN GO SUB 360: PAUSE 10: FOR i=1 TO 5: LET y=18: GO SUB 360: PAUSE 10: LET y=19: GO SUB 360: PAUSE 10: NEXT i: GO TO 140
+ 340 GO TO 220
+ 350 REM Character Draw
+ 360 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
