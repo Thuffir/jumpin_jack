@@ -1,4 +1,4 @@
-Check 0133A903
+Check 50C2F205
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -25,27 +25,31 @@ Auto 8224
  230 DATA BIN 10101010
  240 DATA BIN 01000100
  250 REM Char redefinition
- 260 FOR c=USR "A" TO USR "A"+31
+ 260 FOR i=USR "A" TO USR "A"+31
  270 READ l
- 280 POKE c,l
- 290 NEXT c
+ 280 POKE i,l
+ 290 NEXT i
  300 REM Map definition
- 310 LET a$="\c\c\c\c\c\c\c\c\c\c\c\d\c\c\c\d\c\c\c\c\c\d\c\c\c\c\c\c\d\c\c\c"
- 320 PRINT AT 21,0;a$
- 330 REM Character movement
- 340 LET x=0: LET y=19: LET p=0: LET v=19
- 350 GO SUB 490
- 360 PAUSE 0: LET m$=INKEY$
- 370 IF m$="n" AND x<>0 THEN LET x=x-1
- 380 IF m$="m" AND x<>31 THEN LET x=x+1
- 390 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 490: PAUSE 10: LET x=x-1: LET y=19
- 400 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 490: PAUSE 10: LET x=x+1: LET y=19
- 410 IF m$="a" THEN LET y=19
- 420 REM Pitfall check
- 430 IF a$(x+1)<>"\d" OR y=18 THEN GO TO 350
- 440 PRINT AT v,p;" ": PRINT AT v+1,p;" "
- 450 PRINT AT 21,x;"\a"
- 460 PAUSE 50
- 470 GO TO 320
- 480 REM Character Draw
- 490 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
+ 310 RANDOMIZE
+ 320 LET a$="\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c"
+ 330 FOR i=2 TO 32
+ 340 IF (RND*100)+1<=33 AND a$(i-1)<>"\d" THEN LET a$(i)="\d"
+ 350 NEXT i
+ 360 PRINT AT 21,0;a$
+ 370 REM Character movement
+ 380 LET x=0: LET y=19: LET p=0: LET v=19
+ 390 GO SUB 530
+ 400 PAUSE 0: LET m$=INKEY$
+ 410 IF m$="n" AND x<>0 THEN LET x=x-1
+ 420 IF m$="m" AND x<>31 THEN LET x=x+1
+ 430 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 530: PAUSE 10: LET x=x-1: LET y=19
+ 440 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 530: PAUSE 10: LET x=x+1: LET y=19
+ 450 IF m$="a" THEN LET y=19
+ 460 REM Pitfall check
+ 470 IF a$(x+1)<>"\d" OR y=18 THEN GO TO 390
+ 480 PRINT AT v,p;" ": PRINT AT v+1,p;" "
+ 490 PRINT AT 21,x;"\a"
+ 500 PAUSE 50
+ 510 GO TO 360
+ 520 REM Character Draw
+ 530 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
