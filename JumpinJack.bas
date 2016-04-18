@@ -1,4 +1,4 @@
-Check 4825606A
+Check F0E8E71F
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -29,24 +29,27 @@ Auto 8224
  270 READ l
  280 POKE i,l
  290 NEXT i
- 300 REM Map definition
+ 300 REM Map generation
  310 RANDOMIZE
  320 LET a$="\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c"
  330 FOR i=2 TO 31
  340 IF (RND*100)+1<=33 AND a$(i-1)<>"\d" THEN LET a$(i)="\d"
  350 NEXT i
- 360 PRINT AT 21,0;a$
- 370 REM Character movement
- 380 LET x=0: LET y=19: LET p=0: LET v=19
- 390 GO SUB 500
- 400 PAUSE 0: LET m$=INKEY$
- 410 IF m$="n" AND x<>0 THEN LET x=x-1
- 420 IF m$="m" AND x<>31 THEN LET x=x+1
- 430 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 500: PAUSE 10: LET x=x-1: LET y=19
- 440 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 500: PAUSE 10: LET x=x+1: LET y=19
- 450 IF m$="a" THEN LET y=19
- 460 REM Pitfall check
- 470 IF a$(x+1)="\d" AND y=19 THEN LET y=20: GO SUB 500: PAUSE 10: PRINT AT 20,x;" ": PRINT AT 21,x;"\a": PAUSE 50: GO TO 360
- 480 GO TO 390
- 490 REM Character Draw
- 500 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
+ 360 CLS
+ 370 PRINT AT 21,0;a$
+ 380 REM Character movement
+ 390 LET x=0: LET y=19: LET p=0: LET v=19
+ 400 GO SUB 530
+ 410 PAUSE 0: LET m$=INKEY$
+ 420 IF m$="n" AND x<>0 THEN LET x=x-1
+ 430 IF m$="m" AND x<>31 THEN LET x=x+1
+ 440 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 530: PAUSE 10: LET x=x-1: LET y=19
+ 450 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 530: PAUSE 10: LET x=x+1: LET y=19
+ 460 IF m$="a" THEN LET y=19
+ 470 REM Pitfall check
+ 480 IF a$(x+1)="\d" AND y=19 THEN LET y=20: GO SUB 530: PAUSE 10: PRINT AT 20,x;" ": PRINT AT 21,x;"\a": PAUSE 50: GO TO 370
+ 490 REM Victory check
+ 500 IF x=31 THEN GO SUB 530: PAUSE 10: FOR i=1 TO 5: LET y=18: GO SUB 530: PAUSE 10: LET y=19: GO SUB 530: PAUSE 10: NEXT i: GO TO 320
+ 510 GO TO 400
+ 520 REM Character Draw
+ 530 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
