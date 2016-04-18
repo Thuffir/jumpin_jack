@@ -1,4 +1,4 @@
-Check 22BA7E0C
+Check 0133A903
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -34,19 +34,18 @@ Auto 8224
  320 PRINT AT 21,0;a$
  330 REM Character movement
  340 LET x=0: LET y=19: LET p=0: LET v=19
- 350 GO SUB 470
+ 350 GO SUB 490
  360 PAUSE 0: LET m$=INKEY$
- 370 LET p=x: LET v=y
- 380 IF m$="o" AND x<>0 THEN LET x=x-1
- 390 IF m$="p" AND x<>31 THEN LET x=x+1
- 391 IF m$="q" THEN LET y=18
- 392 IF m$="a" THEN LET y=19
- 400 REM Pitfall check
- 410 IF a$(x+1)<>"\d" OR y=18 THEN GO TO 350
- 420 PRINT AT v,p;" ": PRINT AT v+1,p;" "
- 430 PRINT AT 21,x;"\a"
- 440 PAUSE 50
- 450 GO TO 320
- 460 REM Character Draw
- 470 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b"
- 480 RETURN
+ 370 IF m$="n" AND x<>0 THEN LET x=x-1
+ 380 IF m$="m" AND x<>31 THEN LET x=x+1
+ 390 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 490: PAUSE 10: LET x=x-1: LET y=19
+ 400 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 490: PAUSE 10: LET x=x+1: LET y=19
+ 410 IF m$="a" THEN LET y=19
+ 420 REM Pitfall check
+ 430 IF a$(x+1)<>"\d" OR y=18 THEN GO TO 350
+ 440 PRINT AT v,p;" ": PRINT AT v+1,p;" "
+ 450 PRINT AT 21,x;"\a"
+ 460 PAUSE 50
+ 470 GO TO 320
+ 480 REM Character Draw
+ 490 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
