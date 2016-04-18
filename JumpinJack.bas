@@ -1,4 +1,4 @@
-Check 26989EEE
+Check 22BA7E0C
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -35,7 +35,7 @@ Auto 8224
  330 REM Character movement
  340 LET x=0: LET y=19: LET p=0: LET v=19
  350 GO SUB 470
- 360 LET m$=INKEY$: IF m$="" THEN GO TO 360
+ 360 PAUSE 0: LET m$=INKEY$
  370 LET p=x: LET v=y
  380 IF m$="o" AND x<>0 THEN LET x=x-1
  390 IF m$="p" AND x<>31 THEN LET x=x+1
