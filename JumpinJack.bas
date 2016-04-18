@@ -1,4 +1,4 @@
-Check 7A8B1442
+Check 4825606A
 Auto 8224
   10 REM Jack
   20 DATA BIN 00011000
@@ -32,7 +32,7 @@ Auto 8224
  300 REM Map definition
  310 RANDOMIZE
  320 LET a$="\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c\c"
- 330 FOR i=2 TO 32
+ 330 FOR i=2 TO 31
  340 IF (RND*100)+1<=33 AND a$(i-1)<>"\d" THEN LET a$(i)="\d"
  350 NEXT i
  360 PRINT AT 21,0;a$
