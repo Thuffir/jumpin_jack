@@ -1,4 +1,4 @@
-Check DDDEBC93
+Check 59465754
 Auto 8224
   10 REM Jack
   20 DATA 24,36,66,165,129,90,36,24,24,60,90,153,36,66,66,195
@@ -21,18 +21,17 @@ Auto 8224
  190 CLS
  200 PRINT AT 21,0;a$
  210 LET x=0: LET y=19: LET p=0: LET v=19
- 220 GO SUB 360
+ 220 GO SUB 350
  230 REM User input
  240 PAUSE 0: LET m$=INKEY$
- 250 IF m$="n" AND x<>0 THEN LET x=x-1
- 260 IF m$="m" AND x<>31 THEN LET x=x+1
- 270 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 360: PAUSE 10: LET x=x-1: LET y=19
- 280 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 360: PAUSE 10: LET x=x+1: LET y=19
- 290 IF m$="a" THEN LET y=19
- 300 REM Pitfall check
- 310 IF a$(x+1)="\d" AND y=19 THEN LET y=20: GO SUB 360: PAUSE 10: PRINT AT 20,x;" ": PRINT AT 21,x;"\a": PAUSE 50: GO TO 200
- 320 REM Victory check
- 330 IF x=31 THEN GO SUB 360: PAUSE 10: FOR i=1 TO 5: LET y=18: GO SUB 360: PAUSE 10: LET y=19: GO SUB 360: PAUSE 10: NEXT i: GO TO 140
- 340 GO TO 220
- 350 REM Character Draw
- 360 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
+ 250 IF m$="n" AND x<>0 THEN LET x=x-1: GO TO 300
+ 260 IF m$="m" AND x<>31 THEN LET x=x+1: GO TO 300
+ 270 IF m$="h" AND x>1 THEN LET y=18: LET x=x-1: GO SUB 350: PAUSE 10: LET x=x-1: LET y=19: GO TO 300
+ 280 IF m$="k" AND x<30 THEN LET y=18: LET x=x+1: GO SUB 350: PAUSE 10: LET x=x+1: LET y=19: GO TO 300
+ 290 REM Pitfall check
+ 300 IF a$(x+1)="\d" AND y=19 THEN LET y=20: GO SUB 350: PAUSE 10: PRINT AT 20,x;" ": PRINT AT 21,x;"\a": PAUSE 50: GO TO 200
+ 310 REM Victory check
+ 320 IF x=31 THEN GO SUB 350: PAUSE 10: FOR i=1 TO 5: LET y=18: GO SUB 350: PAUSE 10: LET y=19: GO SUB 350: PAUSE 10: NEXT i: GO TO 140
+ 330 GO TO 220
+ 340 REM Character Draw
+ 350 PRINT AT v,p;" ": PRINT AT v+1,p;" ": PRINT AT y,x;"\a": PRINT AT y+1,x;"\b": LET p=x: LET v=y: RETURN
